@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="fi">
+  <head>
+    <title>Botnia Investment salkku</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="styles.css" type="text/css" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Lato&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+
+   <script
+      type="text/javascript"
+      src="https://www.gstatic.com/charts/loader.js"
+    ></script>
+    <style>
+      body {
+        background-color: rgb(205, 212, 200);
+        position: relative;
+        margin-top: 20px;
+        margin-left: 10px;
+      }
+
+      #chart_wrap {
+        position: relative;
+        padding-bottom: 100%;
+        height: 0;
+        overflow: hidden;
+      }
+
+      #piechart {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        max-width: 600px;
+        height: 400px;
+      }
+    </style>
+  </head>
+
+  <body data-spy="scroll" data-target=".navbar" data-offset="50">
+    <div class="container">
+      <div class="row">
+        <div class="col-">
+          <form action="logging.html">
+            <input
+              class="btn btn-primary"
+              style="margin-bottom: 20px"
+              type="submit"
+              value="Kirjaudu ulos"
+              onclick="clearUsername()"
+            />
+            <button
+              type="button"
+              style="margin-bottom: 20px"
+              class="btn btn-primary"
+              data-toggle="modal"
+              data-target="#change-password-modal"
+            >
+              Vaihda salasana
+            </button>
+          </form>
+
+          <!-- Password change Modal -->
+          <div
+            class="modal fade"
+            id="change-password-modal"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="passwordModalLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="passwordModalLabel">
+                    Vaihda salasana
+                  </h5>
+                  <button
+                    type="button"
+                    class="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <input
+                    class="form-control"
+                    id="changed-password"
+                    type="password"
+                    placeholder="Anna salasana"
+                  />
+                  <input
+                    class="form-control"
+                    id="changed-password-again"
+                    type="password"
+                    placeholder="Anna salasana uudestaan"
+                  />
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-dismiss="modal"
+                    onclick="document.getElementById('changed-password').value = ''; 
+                    document.getElementById('changed-password-again').value = ''"
+                  >
+                    Sulje
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    data-dismiss="modal"
+                    onclick="changePassword(); document.getElementById('changed-password').value = '';
+                    document.getElementById('changed-password-again').value = ''"
+                  >
+                    Vaihda
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <h3 style="margin-bottom: 20px">Tervetuloa Oma salkku -palveluun</h3>
+          <div id="name" style="margin-bottom: 20px"></div>
+
+          <table class="table" style="margin-bottom: 50px">
+            <thead>
+              <tr>
+                <th scope="col"></th>
+                <th scope="col">Markkina-arvo</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Salkku yhteensä</th>
+                <td id="total"></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Rahastot</th>
+                <th scope="col">Osuudet</th>
+                <th scope="col">Markkina-arvo €</th>
+              </tr>
+            </thead>
+            <tbody id="funds-table"></tbody>
+          </table>
+        </div>
+
+        <div class="col- portfolio-funds">
+          <h5>Indeksirahasto Suomi</h5>
+          <button
+            type="button"
+            class="btn btn-primary"
+            style="margin-right: 40px"
+            data-toggle="modal"
+            data-target="#fund-buy-modal"
+            onclick="buyFund('Indeksirahasto Suomi')"
+          >
+            Osta
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary sellButtons"
+            id="sell-button-Finland"
+            data-toggle="modal"
+            data-target="#fund-sell-modal"
+            onclick="sellFund('Indeksirahasto Suomi')"
+          >
+            Myy
+          </button>
+          <hr />
+          <h5>Indeksirahasto Eurooppa</h5>
+          <button
+            type="button"
+            class="btn btn-primary"
+            style="margin-right: 40px"
+            data-toggle="modal"
+            data-target="#fund-buy-modal"
+            onclick="buyFund('Indeksirahasto Eurooppa')"
+          >
+            Osta
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary sellButtons"
+            id="sell-button-Europe"
+            data-toggle="modal"
+            data-target="#fund-sell-modal"
+            onclick="sellFund('Indeksirahasto Eurooppa')"
+          >
+            Myy
+          </button>
+          <hr />
+          <h5>Indeksirahasto USA</h5>
+          <button
+            type="button"
+            class="btn btn-primary"
+            style="margin-right: 40px"
+            data-toggle="modal"
+            data-target="#fund-buy-modal"
+            onclick="buyFund('Indeksirahasto USA')"
+          >
+            Osta
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary sellButtons"
+            id="sell-button-Usa"
+            data-toggle="modal"
+            data-target="#fund-sell-modal"
+            onclick="sellFund('Indeksirahasto USA')"
+          >
+            Myy
+          </button>
+          <hr />
+          <h5>Indeksirahasto Aasia</h5>
+          <button
+            type="button"
+            class="btn btn-primary"
+            style="margin-right: 40px"
+            data-toggle="modal"
+            data-target="#fund-buy-modal"
+            onclick="buyFund('Indeksirahasto Aasia')"
+          >
+            Osta
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary sellButtons"
+            id="sell-button-Asia"
+            data-toggle="modal"
+            data-target="#fund-sell-modal"
+            onclick="sellFund('Indeksirahasto Aasia')"
+          >
+            Myy
+          </button>
+          <hr />
+          <h5>Dividend Europe</h5>
+          <button
+            type="button"
+            class="btn btn-primary"
+            style="margin-right: 40px"
+            data-toggle="modal"
+            data-target="#fund-buy-modal"
+            onclick="buyFund('Dividend Europe')"
+          >
+            Osta
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary sellButtons"
+            id="sell-button-DivEur"
+            data-toggle="modal"
+            data-target="#fund-sell-modal"
+            onclick="sellFund('Dividend Europe')"
+          >
+            Myy
+          </button>
+          <hr />
+          <h5>Dividend USA</h5>
+          <button
+            type="button"
+            class="btn btn-primary"
+            style="margin-right: 40px"
+            data-toggle="modal"
+            data-target="#fund-buy-modal"
+            onclick="buyFund('Dividend USA')"
+          >
+            Osta
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary sellButtons"
+            id="sell-button-DivUsa"
+            data-toggle="modal"
+            data-target="#fund-sell-modal"
+            onclick="sellFund('Dividend USA')"
+          >
+            Myy
+          </button>
+          <hr />
+          <h5>Megatrendit</h5>
+          <button
+            type="button"
+            class="btn btn-primary"
+            style="margin-right: 40px"
+            data-toggle="modal"
+            data-target="#fund-buy-modal"
+            onclick="buyFund('Megatrendit')"
+          >
+            Osta
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary sellButtons"
+            id="sell-button-Megatrends"
+            data-toggle="modal"
+            data-target="#fund-sell-modal"
+            onclick="sellFund('Megatrendit')"
+          >
+            Myy
+          </button>
+          <hr />
+        </div>
+
+        <!--Stock buying modal-->
+        <div
+          class="modal fade"
+          id="fund-buy-modal"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="fundBuyModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="fundBuyModalLabel"></h5>
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <h6>
+                  Minimimerkintä: 10 €, Maksimimerkintä: 100000 €. Kun klikkaat
+                  Osta-nappia, niin sinut ohjataan verkkopankkien
+                  kirjautumiseen, josta voit valita oman verkkopankkisi ja
+                  maksaa siellä rahastomerkinnän.
+                </h6>
+                <input
+                  class="form-control"
+                  id="fund-buy-amount"
+                  type="number"
+                  placeholder="Anna summa"
+                />
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal"
+                  onclick="document.getElementById('fund-buy-amount').value = ''"
+                >
+                  Sulje
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  data-dismiss="modal"
+                  onclick="sendFundBuyToDatabase();
+                document.getElementById('fund-buy-amount').value = ''"
+                >
+                  Osta
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--Stock selling modal-->
+        <div
+          class="modal fade"
+          id="fund-sell-modal"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="fundSellModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="fundSellModalLabel"></h5>
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <h6 id="fund-confirmation">
+                  Anna kappalemäärä, jolla lunastat rahastoa ja tilinumero.
+                </h6>
+                <input
+                  class="form-control"
+                  id="fund-sell-shares"
+                  type="number"
+                  placeholder="Lunastettavat osuudet"
+                />
+                <input
+                  class="form-control"
+                  id="bankaccount"
+                  type="text"
+                  placeholder="Tilinumero"
+                />
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal"
+                  onclick="document.getElementById('bankaccount').value = '';document.getElementById('fund-sell-shares').value = ''"
+                >
+                  Sulje
+                </button>
+                <button
+                  id="sendFundSellToDbButton"
+                  type="button"
+                  class="btn btn-primary"
+                  data-dismiss="modal"
+                  value=""
+                  onclick="sendFundSellToDatabase(value); 
+                  document.getElementById('bankaccount').value = '';document.getElementById('fund-sell-shares').value = ''"
+                >
+                  Myy
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="chart_wrap">
+        <div id="piechart"></div>
+      </div>
+    </div>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-firestore.js"></script>
+
+    <script>
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      var firebaseConfig = {
+        apiKey: "AIzaSyDaDWC93nP9F-QG3fL6exd9TOUULpjfvfY",
+        authDomain: "bicustomers-16c29.firebaseapp.com",
+        databaseURL: "https://bicustomers-16c29.firebaseio.com",
+        projectId: "bicustomers-16c29",
+        storageBucket: "bicustomers-16c29.appspot.com",
+        messagingSenderId: "384693819092",
+        appId: "1:384693819092:web:dd679e2c66298634014d41",
+        measurementId: "G-11S0QE8FW2",
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      var db = firebase.firestore();
+      //firebase.analytics();
+    </script>
+
+    <script>
+      var username = localStorage.getItem("username");
+      
+      var holdings = [];
+      var fundTransaction = "";
+     
+     db.collection("customers")
+        .where("username", "==", username)
+        .get()
+        .then(function (querySnapshot) {
+          querySnapshot.forEach(function (doc) {
+            
+            var holdingsInfo = [];
+            var totalHoldings = 0;
+            var userId = "";
+            var action = "";
+            var fund = "";
+            var shares = "";
+            var amount = "";
+            var bankAccount = "";
+            var date = "";
+            var time = "";
+
+            holdings.push(doc.data().holdings);
+            for (var i = 0; i < holdings[0].length; i++) {
+              totalHoldings += holdings[0][i].value;
+            }
+            userId = doc.id;
+            fundTransaction = doc.data().transaction;
+            var tempTable = fundTransaction.split("/");
+           
+            action = tempTable[0];
+            fund = tempTable[1];
+            shares = tempTable[2];
+            amount = tempTable[3];
+            time = tempTable[4];
+            date = tempTable[5];
+            if (tempTable.length === 7) {
+              bankAccount = tempTable[6];
+            }
+
+            if (fundTransaction !== "") {
+              var bankText = "";
+              if (bankAccount != "") {
+                var bankText = "Maksetaan tilille: " + bankAccount;
+              }
+              $.alert({
+                title: "Toimeksianto toteutettu ",
+                content:
+                  "pvm. " +
+                  date +
+                  " klo." +
+                  time +
+                  "<br>" +
+                  action +
+                  ": " +
+                  fund +
+                  ", " +
+                  shares +
+                  " kpl<br>Summa: " +
+                  amount +
+                  " €<br>" +
+                  bankText,
+              });
+              db.collection("customers").doc(userId).update({
+                transaction: "",
+              });
+            }
+
+            $("#name").append("<h3>" + doc.data().name + "</h3>");
+
+            $("#sell-button-Finland").attr("disabled", true);
+            $("#sell-button-Europe").attr("disabled", true);
+            $("#sell-button-Usa").attr("disabled", true);
+            $("#sell-button-Asia").attr("disabled", true);
+            $("#sell-button-DivEur").attr("disabled", true);
+            $("#sell-button-DivUsa").attr("disabled", true);
+            $("#sell-button-Megatrends").attr("disabled", true);
+
+            for (var i = 0; i < holdings[0].length; i++) {
+              $("#funds-table").append(
+                "<tr><th scope='row'>" +
+                  holdings[0][i].fund +
+                  "</th><td>" +
+                  holdings[0][i].shares +
+                  "</td><td>" +
+                  holdings[0][i].value +
+                  "</td></tr>"
+              );
+
+              if (holdings[0][i].fund === "Indeksirahasto Suomi") {
+                $("#sell-button-Finland").attr("disabled", false);
+              }
+              if (holdings[0][i].fund === "Indeksirahasto Eurooppa") {
+                $("#sell-button-Europe").attr("disabled", false);
+              }
+              if (holdings[0][i].fund === "Indeksirahasto USA") {
+                $("#sell-button-Usa").attr("disabled", false);
+              }
+              if (holdings[0][i].fund === "Indeksirahasto Aasia") {
+                $("#sell-button-Asia").attr("disabled", false);
+              }
+              if (holdings[0][i].fund === "Dividend Europe") {
+                $("#sell-button-DivEur").attr("disabled", false);
+              }
+              if (holdings[0][i].fund === "Dividend USA") {
+                $("#sell-button-DivUsa").attr("disabled", false);
+              }
+              if (holdings[0][i].fund === "Megatrendit") {
+                $("#sell-button-Megatrends").attr("disabled", false);
+              }
+            }
+
+            console.log(doc.id, " => ", doc.data());
+            $("#holdings").append(holdingsInfo.join(""));
+
+            $("#total").append(totalHoldings.toFixed(2) + " €");
+            
+            //Show chart if customer have funds
+            if (holdings[0].length > 0) {
+              // Load the Visualization API and the piechart package.
+              google.charts.load("current", { packages: ["corechart"] });
+
+              // Set a callback to run when the Google Visualization API is loaded.
+              google.charts.setOnLoadCallback(drawChart);
+
+              // Callback that creates and populates a data table,
+              // instantiates the pie chart, passes in the data and
+              // draws it.
+              function drawChart() {
+                var data = new google.visualization.DataTable();
+                data.addColumn("string", "Rahasto");
+                data.addColumn("number", "Value");
+
+                for (var i = 0; i < holdings[0].length; i++) {
+                  data.addRow([holdings[0][i].fund, holdings[0][i].value]);
+                }
+
+                // Set chart options
+                var options = {
+                  title: "Rahastot",
+                  width: "100%",
+                  height: "500px",
+                  backgroundColor: "#CDD4C8",
+                  chartArea: { width: "90%" },
+                };
+
+                // Instantiate and draw our chart, passing in some options.
+                var chart;
+                chart = new google.visualization.PieChart(
+                  document.getElementById("piechart")
+                );
+                google.visualization.events.addListener(
+                  chart,
+                  "select",
+                  selectHandler
+                );
+                chart.draw(data, options);
+              }
+
+              function selectHandler() {
+                //var selectedItem = chart.getSelection()[0];
+                //var value = data.getValue(selectedItem.row, 0);
+              }
+            }
+          });
+        })
+        .catch(function (error) {
+          console.log("Error getting documents: ", error);
+        });
+
+      function changePassword() {
+        var password = document.getElementById("changed-password").value;
+        var passwordAgain = document.getElementById("changed-password-again")
+          .value;
+        var userId = "";
+        
+        if (password === passwordAgain) {
+          db.collection("customers")
+            .where("username", "==", username)
+            .get()
+            .then(function (querySnapshot) {
+              querySnapshot.forEach(function (doc) {
+                userId = doc.id;
+              });
+              
+              db.collection("customers")
+                .doc(userId)
+                .update({ password: password })
+                .then(function () {
+                  console.log("Password successfully changed!");
+                  $.alert({
+                    title: "Salasana vaihdettu!",
+                    content: "",
+                  });
+                });
+            })
+            .catch(function (error) {
+              console.log("Error getting documents: ", error);
+            });
+        } else {
+          $.alert({
+            title: "Tarkasta salasanat!",
+            content: "",
+          });
+        }
+      }
+
+      function clearUsername () {
+        localStorage.setItem("username", "");
+      }
+
+      function buyFund(fund) {
+        var text = "Osto " + fund;
+        $("#fundBuyModalLabel").text(text);
+      }
+
+      function sellFund(fund) {
+        var text = "Myynti " + fund;
+        $("#fundSellModalLabel").text(text);
+        $("#sendFundSellToDbButton").val(fund);
+      }
+
+      function sendFundBuyToDatabase() {
+        var amount = parseFloat(
+          document.getElementById("fund-buy-amount").value
+        );
+        amount = amount.toFixed(2);
+        var shares = 0;
+        var fundTemp = $("#fundBuyModalLabel").text();
+        var fundCode = "";
+        var userId = "";
+        var fundOwnedBefore = false;
+        var updatedShares = 0;
+        var updatedValue = 0;
+
+        var fund = fundTemp.slice(5, fundTemp.length);
+        
+        if (amount < 10 || amount > 100000) {
+          $.alert({
+            title: "Virheellinen summa",
+            content: "Minimi: 10 €, Maksimi: 100000 €",
+          });
+        } else {
+          switch (fund) {
+            case "Indeksirahasto Suomi":
+              fundCode = "IndexFin";
+              break;
+            case "Indeksirahasto Eurooppa":
+              fundCode = "IndexEur";
+              break;
+            case "Indeksirahasto USA":
+              fundCode = "IndexUsa";
+              break;
+            case "Indeksirahasto Aasia":
+              fundCode = "IndexAsia";
+              break;
+            case "Dividend Europe":
+              fundCode = "DivEur";
+              break;
+            case "Dividend USA":
+              fundCode = "DivUsa";
+              break;
+            case "Megatrendit":
+              fundCode = "Megatrends";
+              break;
+          }
+
+          db.collection("customers")
+            .where("username", "==", username)
+            .get()
+            .then(function (querySnapshot) {
+              querySnapshot.forEach(function (doc) {
+                userId = doc.id;
+              });
+            })
+            .catch(function (error) {
+              console.log("Error getting documents: ", error);
+            });
+
+          db.collection("funds")
+            .where("fund", "==", fundCode)
+            .get()
+            .then(function (querySnapshot) {
+              querySnapshot.forEach(function (doc) {
+                console.log(doc.id, " => ", doc.data());
+                fundValue = doc.data().value;
+                shares = parseFloat((amount / fundValue).toFixed(6));
+                var fundRef = db.collection("customers").doc(userId);
+
+                for (var i = 0; i < holdings[0].length; i++) {
+                  if (holdings[0][i].fund == fund) {
+                    fundOwnedBefore = true;
+                    updatedShares = holdings[0][i].shares;
+                    updatedValue = holdings[0][i].value;
+                    updatedShares = parseFloat(
+                      (updatedShares + shares).toFixed(6)
+                    );
+                    updatedValue = parseFloat(
+                      (updatedValue + shares * fundValue).toFixed(2)
+                    );
+                    //Updated fund to be stored in the database
+                    var updatedFund = {
+                      fund: fund,
+                      shares: updatedShares,
+                      value: updatedValue,
+                    };
+                    fundRef.update({
+                      holdings: firebase.firestore.FieldValue.arrayRemove(
+                        holdings[0][i]
+                      ),
+                    });
+                  }
+                }
+
+                //Customer doesn't have fund before
+                if (fundOwnedBefore === false) {
+                  updatedShares = shares;
+                  updatedValue = parseFloat((shares * fundValue).toFixed(2));
+                 
+                  var updatedFund = {
+                    fund: fund,
+                    shares: updatedShares,
+                    value: updatedValue,
+                  };
+                }
+                var timeStamp = new Date();
+                var time = timeStamp.toLocaleTimeString();
+                var date = timeStamp.toLocaleDateString();
+                db.collection("customers")
+                  .doc(userId)
+                  .update({
+                    transaction:
+                      "Osto/" +
+                      fund +
+                      "/" +
+                      shares +
+                      "/" +
+                      amount +
+                      "/" +
+                      time +
+                      "/" +
+                      date,
+                  });
+
+                var entry =
+                  "Buy: " + fund + ", amount: " + amount + " €, " + timeStamp;
+                fundRef.update({
+                  entries: firebase.firestore.FieldValue.arrayUnion(entry),
+                });
+
+                fundRef
+                  .update({
+                    holdings: firebase.firestore.FieldValue.arrayUnion(
+                      updatedFund
+                    ),
+                  })
+                  .then(function (docRef) {
+                    console.log("Document written with ID: ");
+                    location.reload();
+                  });
+              });
+            })
+            .catch(function (error) {
+              console.log("Error getting documents: ", error);
+            });
+        }
+      }
+
+      function sendFundSellToDatabase(fund) {
+        var sharesToSell = parseFloat(
+          document.getElementById("fund-sell-shares").value
+        );
+        var bankAccount = document.getElementById("bankaccount").value;
+        var ownedShares = 0;
+        var newShares = 0;
+        var fundCode = "";
+        var fundValue = 0;
+        var cashedAmount = 0;
+        var userId = "";
+        var oldFund = {};
+        
+        db.collection("customers")
+          .where("username", "==", username)
+          .get()
+          .then(function (querySnapshot) {
+            querySnapshot.forEach(function (doc) {
+              holdings.push(doc.data().holdings);
+              for (var i = 0; i < holdings[0].length; i++) {
+                if (holdings[0][i].fund == fund) {
+                  ownedShares = holdings[0][i].shares;
+                  oldFund = holdings[0][i];
+                  userId = doc.id;
+                }
+              }
+            });
+           
+            newShares = parseFloat((ownedShares - sharesToSell).toFixed(6));
+           
+            if (bankAccount === "") {
+              $.alert({
+                title: "Virhe toimeksiannossa!",
+                content: "Anna tilinumero, jolle lunastus maksetaan.",
+              });
+            } else if (sharesToSell > ownedShares) {
+              $.alert({
+                title: "Virhe toimeksiannossa!",
+                content:
+                  "Omistat rahastoa " + fund + " " + ownedShares + " kpl.",
+              });
+            } else if (newShares > 0 && newShares < 0.5) {
+              $.alert({
+                title: "Virhe toimeksiannossa!",
+                content:
+                  "Jos salkkuun jää rahastoa, niin jäävien osuuksien täytyy olla vähintään 0,5 kpl. Lunasta kaikki tai pienempi määrä.",
+              });
+            } else if (sharesToSell < 0.5) {
+              $.alert({
+                title: "Virhe toimeksiannossa!",
+                content: "Minimi lunastusmäärä on 0,5 kpl.",
+              });
+            } else {
+              switch (fund) {
+                case "Indeksirahasto Suomi":
+                  fundCode = "IndexFin";
+                  break;
+                case "Indeksirahasto Eurooppa":
+                  fundCode = "IndexEur";
+                  break;
+                case "Indeksirahasto USA":
+                  fundCode = "IndexUsa";
+                  break;
+                case "Indeksirahasto Aasia":
+                  fundCode = "IndexAsia";
+                  break;
+                case "Dividend Europe":
+                  fundCode = "DivEur";
+                  break;
+                case "Dividend USA":
+                  fundCode = "DivUsa";
+                  break;
+                case "Megatrendit":
+                  fundCode = "Megatrends";
+                  break;
+              }
+
+              db.collection("funds")
+                .where("fund", "==", fundCode)
+                .get()
+                .then(function (querySnapshot) {
+                  querySnapshot.forEach(function (doc) {
+                    console.log(doc.id, " => ", doc.data());
+                    fundValue = doc.data().value;
+                    cashedAmount = parseFloat(
+                      (sharesToSell * fundValue).toFixed(2)
+                    );
+
+                    //Update sell to database
+                    newValue = parseFloat((newShares * fundValue).toFixed(2));
+                   
+                    var fundRef = db.collection("customers").doc(userId);
+                    var timeStamp = new Date();
+                    var time = timeStamp.toLocaleTimeString();
+                    var date = timeStamp.toLocaleDateString();
+
+                    var entry =
+                      "Sell: " +
+                      fund +
+                      ", amount: " +
+                      cashedAmount +
+                      " €, " +
+                      bankAccount +
+                      " " +
+                      time;
+                    var updatedFund = {
+                      fund: fund,
+                      shares: newShares,
+                      value: newValue,
+                    };
+                    db.collection("customers")
+                      .doc(userId)
+                      .update({
+                        transaction:
+                          "Myynti/" +
+                          fund +
+                          "/" +
+                          sharesToSell +
+                          "/" +
+                          cashedAmount +
+                          "/" +
+                          time +
+                          "/" +
+                          date +
+                          "/" +
+                          bankAccount,
+                      });
+                    fundRef.update({
+                      entries: firebase.firestore.FieldValue.arrayUnion(entry),
+                    });
+
+                    fundRef.update({
+                      holdings: firebase.firestore.FieldValue.arrayRemove(
+                        oldFund
+                      ),
+                    });
+
+                    if (newShares > 0) {
+                      fundRef
+                        .update({
+                          holdings: firebase.firestore.FieldValue.arrayUnion(
+                            updatedFund
+                          ),
+                        })
+                        .then(function (docRef) {
+                          console.log("Fund updated");
+                          location.reload();
+                        });
+                    } else {
+                      fundRef
+                        .update({
+                          holdings: firebase.firestore.FieldValue.arrayRemove(),
+                        })
+                        .then(function (docRef) {
+                          console.log("Fund updated");
+                          location.reload();
+                        });
+                    }
+                  });
+                })
+                .catch(function (error) {
+                  console.log("Error getting documents: ", error);
+                });
+            }
+          })
+          .catch(function (error) {
+            console.log("Error getting documents: ", error);
+          });
+      }
+    </script>
+  </body>
+</html>

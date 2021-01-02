@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="fi">
+  <head>
+    <title>Botnia Investment asiointi</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="styles.css" type="text/css" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Lato&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Paytone+One&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+    <style>
+      body {
+        background-color: rgb(205, 212, 200);
+        position: relative;
+      }
+      .dropdown-item {
+        font-family: "Lato", sans-serif;
+        color: white !important;
+      }
+      #login {
+        margin-top: 100px;
+        margin-bottom: 40px;
+      }
+    </style>
+  </head>
+
+  <body data-spy="scroll" data-target=".navbar" data-offset="50">
+    <div class="container" id="begin">
+      <nav
+        class="navbar navbar-expand-lg navbar-custom fixed-top container"
+        id="top-nav-bar"
+      >
+        <a
+          class="navbar-brand"
+          href="index.html#begin"
+          style="font-family: 'Paytone One', sans-serif"
+          ><img src="./Images/logo2.jpg" alt="navbar logo" id="navbar-logo" />
+          Botnia Investment
+        </a>
+        <button
+          class="navbar-toggler custom-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html#begin"
+                >Etusivu <span class="sr-only"> (current)</span></a
+              >
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdownFunds"
+                role="button"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+                >Rahastot</a
+              >
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownFunds">
+                <p class="fund-text-container">Passiiviset rahastot</p>
+                <a class="dropdown-item" href="index.html#funds"
+                  >Indeksirahasto Suomi</a
+                >
+                <a class="dropdown-item" href="index.html#funds"
+                  >Indeksirahasto Eurooppa</a
+                >
+                <a class="dropdown-item" href="index.html#funds"
+                  >Indeksirahasto USA</a
+                >
+                <a class="dropdown-item" href="index.html#funds"
+                  >Indeksirahasto Aasia</a
+                >
+                <div class="dropdown-divider"></div>
+                <p class="fund-text-container">Aktiiviset rahastot</p>
+                <a class="dropdown-item" href="index.html#funds"
+                  >Dividend Europe</a
+                >
+                <a class="dropdown-item" href="index.html#funds"
+                  >Dividend USA</a
+                >
+                <a class="dropdown-item" href="index.html#funds">Megatrendit</a>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+                >Asiointi</a
+              >
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Oma salkku</a>
+                <a class="dropdown-item" href="#">Tule asiakkaaksi</a>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="index.html#company">Yritys</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="index.html#contact">Ota yhteyttä</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <!--Log in to portfolio form-->
+      <form class="form-signin" id="login">
+        <h1 class="h3 mb-3 font-weight-normal"><strong>Oma salkku</strong></h1>
+        <label for="inputUsername" class="sr-only">Username</label>
+        <input
+          type="email"
+          id="inputUsername"
+          class="form-control"
+          placeholder="Käyttäjätunnus"
+          required
+          autofocus
+          style="margin-bottom: 10px"
+        />
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input
+          type="password"
+          id="inputPassword"
+          class="form-control"
+          placeholder="Salasana"
+          required
+          style="margin-bottom: 10px"
+        />
+        <div id="error-message"></div>
+        <button
+          class="btn btn-lg btn-primary btn-block"
+          type="button"
+          onclick="kirjauduSisaan();document.getElementById('inputUsername').value='';document.getElementById('inputPassword').value=''"
+        >
+          Kirjaudu sisään
+        </button>
+      </form>
+
+      <h3>Tule asiakkaaksi</h3>
+      <p>
+        Täytä yhteystietosi. Saat sen jälkeen käyttäjätunnuksen ja salasanan,
+        jolla voit kirjautua Oma salkku-palveluun.
+      </p>
+      <!--Registration form-->
+      <form id="registration">
+        <div class="form-group">
+          <label for="nameinput">Nimi</label>
+          <input
+            type="text"
+            class="form-control"
+            id="nameinput"
+            placeholder="Nimi"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="addressinput">Lähiosoite</label>
+          <input
+            type="text"
+            class="form-control"
+            id="addressinput"
+            placeholder="Lähiosoite"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="cityinput">Postinumero ja kunta</label>
+          <input
+            type="text"
+            class="form-control"
+            id="cityinput"
+            placeholder="Postinumero ja kunta"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="emailinput">Sähköposti</label>
+          <input
+            type="email"
+            class="form-control"
+            id="emailinput"
+            placeholder="Sähköposti"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="phoneinput">Puhelin</label>
+          <input
+            type="tel"
+            class="form-control"
+            id="phoneinput"
+            placeholder="Puhelin"
+          />
+        </div>
+        <button
+          type="button"
+          class="btn btn-primary"
+          onclick="laheta(); document.getElementById('nameinput').value='';document.getElementById('addressinput').value='';
+        document.getElementById('cityinput').value='';document.getElementById('emailinput').value='';document.getElementById('phoneinput').value=''"
+        >
+          Lähetä
+        </button>
+      </form>
+    </div>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.2/firebase-firestore.js"></script>
+
+    <script>
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      var firebaseConfig = {
+        apiKey: "AIzaSyDaDWC93nP9F-QG3fL6exd9TOUULpjfvfY",
+        authDomain: "bicustomers-16c29.firebaseapp.com",
+        databaseURL: "https://bicustomers-16c29.firebaseio.com",
+        projectId: "bicustomers-16c29",
+        storageBucket: "bicustomers-16c29.appspot.com",
+        messagingSenderId: "384693819092",
+        appId: "1:384693819092:web:dd679e2c66298634014d41",
+        measurementId: "G-11S0QE8FW2",
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      var db = firebase.firestore();
+      //firebase.analytics();
+    </script>
+
+    <script>
+      function laheta() {
+        var customerName = document.getElementById("nameinput").value;
+        var customerAddress = document.getElementById("addressinput").value;
+        var customerCity = document.getElementById("cityinput").value;
+        var customerEmail = document.getElementById("emailinput").value;
+        var customerPhone = document.getElementById("phoneinput").value;
+
+        var passwordArray = [];
+        var password = "";
+        var userNameArray = [];
+        var username = "";
+
+        if (
+          customerName == "" ||
+          customerAddress == "" ||
+          customerCity == "" ||
+          customerEmail == ""
+        ) {
+          $.alert({
+            title: "Virhe rekisteröitymisessä!",
+            content: "Pakolliset tiedot ovat nimi, osoite ja sähköposti.",
+          });
+        } else {
+          //Create password
+          var tempName = customerName;
+          tempName = customerName.replace(/\s+/g, "");
+
+          if (tempName.length < 10) {
+            tempName = tempName + "abcdefg";
+          }
+
+          for (var i = 0; i < 5; i++) {
+            passwordArray.push(Math.floor(Math.random() * 9) + 1);
+            passwordArray.push(tempName.charAt(i * 2));
+          }
+          password = passwordArray.join("");
+
+          //Create username
+          for (var i = 0; i < 8; i++) {
+            userNameArray.push(Math.floor(Math.random() * 10));
+          }
+          username = userNameArray.join("");
+
+          db.collection("customers")
+            .add({
+              name: customerName,
+              address: customerAddress,
+              city: customerCity,
+              email: customerEmail,
+              phone: customerPhone,
+              password: password,
+              username: username,
+              holdings: [],
+              transaction: "",
+            })
+            .then(function (docRef) {
+              console.log("Document written with ID: ", docRef.id);
+              $.alert({
+                title: "Tervetuloa asiakkaaksi " + customerName + "!<br>",
+                content:
+                  "Käyttäjätunnus: " +
+                  username +
+                  "<br>Salasana: " +
+                  password +
+                  "<br>Voit vaihtaa salasanan Oma salkku-palvelussa." +
+                  "<br><br>Antamasi yhteystiedot:<br>Osoite: " +
+                  customerAddress +
+                  " " +
+                  customerCity +
+                  "<br>puh. ja email: " +
+                  customerPhone +
+                  " " +
+                  customerEmail,
+              });
+            })
+            .catch(function (error) {
+              console.error("Error adding document: ", error);
+            });
+        }
+      }
+
+      function kirjauduSisaan() {
+        var username = document.getElementById("inputUsername").value;
+        var password = document.getElementById("inputPassword").value;
+
+        db.collection("customers")
+          .where("username", "==", username)
+          .get()
+          .then(function (querySnapshot) {
+            querySnapshot.forEach(function (doc) {
+              console.log(doc.id, " => ", doc.data());
+
+              if (doc.data().password !== password) {
+                $.alert({
+                  title: "Tarkasta salasana",
+                  content: "",
+                });
+              } else {
+                var url = "portfolio.html";
+                window.open(url);
+                localStorage.setItem("username", username);
+              }
+            });
+          })
+          .catch(function (error) {
+            console.log("Error getting documents: ", error);
+          });
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="fi">
+  <head>
+    <title>Botnia Investment</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="styles.css" type="text/css" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Lato&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Paytone+One&display=swap" rel="stylesheet">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+      body {
+        background-color: rgb(205, 212, 200);
+        position: relative;
+      }
+      .carousel-control-next-icon {
+        background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%2300008B' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E");
+      }
+      .carousel-control-prev-icon {
+        background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%2300008B' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E");
+      }
+
+      #ex1Slider .slider-selection {
+        background: #bababa;
+      }
+
+      .dropdown-item {
+        font-family: 'Lato', sans-serif;
+        color: white !important;
+      }
+      @media (max-width: 700px) {
+        .page-footer {
+          font-size: 11px;
+        }  
+      }
+    </style>
+  </head>
+
+  <body data-spy="scroll" data-target=".navbar" data-offset="50">
+    <div class="container" id="begin">
+      <nav
+        class="navbar navbar-expand-lg navbar-custom fixed-top container"
+        id="top-nav-bar">
+        <a class="navbar-brand" href="#begin" style="font-family: 'Paytone One', sans-serif;"
+          ><img src="./Images/logo2.jpg" alt="navbar logo" id="navbar-logo" />
+          Botnia Investment
+        </a>
+
+        <button
+          class="navbar-toggler custom-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#begin"
+                >Etusivu <span class="sr-only"> (current)</span></a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdownFunds"
+                role="button"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+                >Rahastot</a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownFunds">
+                <p class="fund-text-container">Passiiviset rahastot</p>
+                <a class="dropdown-item" href="#accordion">Indeksirahasto Suomi</a>
+                <a class="dropdown-item" href="#accordion">Indeksirahasto Eurooppa</a>
+                <a class="dropdown-item" href="#accordion">Indeksirahasto USA</a>
+                <a class="dropdown-item" href="#accordion">Indeksirahasto Aasia</a>
+                <div class="dropdown-divider"></div>
+                <p class="fund-text-container">Aktiiviset rahastot</p>
+                <a class="dropdown-item" href="#accordion">Dividend Europe</a>
+                <a class="dropdown-item" href="#accordion">Dividend USA</a>
+                <a class="dropdown-item" href="#accordion">Megatrendit</a>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+                >Asiointi</a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="logging.html">Oma salkku</a>
+                <a class="dropdown-item" href="logging.html#registration"
+                  >Tule asiakkaaksi</a>
+              </div>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="#company">Yritys</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="#contact">Ota yhteyttä</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <!-- Picture carousel -->
+      <div id="carousel" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ul class="carousel-indicators">
+          <li data-target="#carousel" data-slide-to="0" class="active"></li>
+          <li data-target="#carousel" data-slide-to="1"></li>
+          <li data-target="#carousel" data-slide-to="2"></li>
+          <li data-target="#carousel" data-slide-to="3"></li>
+        </ul>
+
+        <!-- The slideshow -->
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="./Images/saastopossu.jpg" alt="laskin ja rahaa" />
+            <div class="carousel-caption">
+              <h3 class="carousel-heading">Laita rahasi tuottamaan!</h3>
+              <p>
+                Rahastovalikoimassamme on viisi edullista indeksirahastoa ja
+                kolme aktiivista rahastoa.
+              </p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="./Images/aasia.jpg" alt="Asia" />
+            <div class="carousel-caption">
+              <h3 class="carousel-heading">Indeksirahasto Aasia!</h3>
+              <p>
+                Indeksirahasto Aasia on uusin rahastomme, jonka avulla voit
+                hajauttaa sijoituksia Aasian markkinoille.
+              </p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="./Images/newyork.jpg" alt="New York" />
+            <div class="carousel-caption">
+              <h3 class="carousel-heading">
+                Joe Bidenin kausi alkamassa Yhdysvalloissa
+              </h3>
+              <a href="#" style="color: #FFFFFF";
+                >Lue salkunhoitajamme artikkeli USA:n taloudesta ja
+                osakemarkkinoista.</a>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="./Images/future.jpg" alt="binoculars" />
+            <div class="carousel-caption">
+              <h3 class="carousel-heading">
+                Koronarokote, keskuspankkien elvytyspaketit...
+              </h3>
+              <a href="#" style="color: #FFFFFF"
+                >Lue salkunhoitajamme blogikirjoitus vuoden 2021
+                osakemarkkinoiden näkymistä.</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Left and right controls -->
+        <a class="carousel-control-prev" href="#carousel" data-slide="prev">
+          <span class="carousel-control-prev-icon"></span>
+        </a>
+        <a class="carousel-control-next" href="#carousel" data-slide="next">
+          <span class="carousel-control-next-icon"></span>
+        </a>
+      </div>
+
+      <div class="container" id="company">
+        <div class="row">
+          <div class="col-md-4">
+            <img
+              src="./Images/logo2.jpg"
+              alt="company logo"
+              class="company-picture"
+            />
+          </div>
+          <div class="col-md-4 restaurant-text">
+            <h1>Botnia Investment</h1>
+            <p>
+              Botnia Investment on rahastoyhtiö, joka tarjoaa asiakkailleen
+              kustannustehokkaita osakerahastoja. Valikoimiimme kuuluu neljä
+              edullista passiivista indeksirahastoa ja kolme aktiivista
+              rahastoa. Myös aktiivisten rahastojemme kulut ovat maltilliset.
+              Yrityksemme on aloittanut toimintansa kesäkuussa 2010 ja
+              toimipaikkamme sijaitsee Vaasassa.
+            </p>
+          </div>
+          <div class="col-md-4">
+            <img
+              src="./Images/moneygrowth.jpg"
+              alt="kolikoita"
+              class="company-picture"/>
+          </div>
+        </div>
+      </div>
+
+      <!--Accordion-->
+      <div id="accordion" style="margin-bottom: 40px">
+        <div class="card" id="funds">
+          <div class="card-header">
+            <a class="card-link" data-toggle="collapse" href="#collapseOne">
+              Indeksirahasto Suomi
+            </a>
+          </div>
+          <div id="collapseOne" class="collapse" data-parent="#accordion">
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <img
+                    class="card-img-top"
+                    src="./Images/suomenlippu.jpg"
+                    alt="suomen lippu"/>
+                </div>
+                <div class="col">
+                  <h2>Indeksirahasto Suomi</h2>
+                  <p>
+                    Haluaisitko olla mukana tunnettujen suomalaisyritysten
+                    menestyksessä? Indeksirahasto Suomen avulla pääset
+                    osalliseksi Helsingin pörssin 25 vaihdetuimpien osakkeiden
+                    yritysten tuotoista. Rahaston tavoitteena on siis pyrkiä
+                    seuraamaan mahdollisimman hyvin OMX-25-indeksiä.
+                  </p>
+                </div>
+                <div class="col">
+                  <ul>
+                    <li>Hallinnointipalkkio 0,4 % vuodessa</li>
+                    <li>Merkintäpalkkio 0,05 %</li>
+                    <li>
+                      Lunastuspalkkio 0,1 %,<br />
+                      jos sijoitusaika &leq; 180 päivää
+                    </li>
+                    <li>
+                      Lunastuspalkkio 0,05 %,<br />
+                      jos sijoitusaika > 180 päivää
+                    </li>
+                    <li>Aloituspäivämäärä 1.6.2010</li>
+                    <li>Minimimerkintä 10 €</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <a
+              class="collapsed card-link"
+              data-toggle="collapse"
+              href="#collapseTwo">
+              Indeksirahasto Eurooppa
+            </a>
+          </div>
+          <div id="collapseTwo" class="collapse" data-parent="#accordion">
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <img
+                    class="card-img-top"
+                    src="./Images/eurolippu.jpg"
+                    alt="euroopan unioni lippu"/>
+                </div>
+                <div class="col">
+                  <h2>Indeksirahasto Eurooppa</h2>
+                  <p>
+                    Indeksirahasto Euroopan avulla saat hyvän hajautuksen
+                    eurooppalaisiin osakkeisiin. Rahasto pyrkii seuraamaan MSCI
+                    Europe -indeksin tuottoa. MSCI Europe Index on osakeindeksi,
+                    joka edustaa 15 kehittyneen Euroopan maan suurten ja
+                    keskisuurten yhtiöiden markkinoita.
+                  </p>
+                </div>
+                <div class="col">
+                  <ul>
+                    <li>Hallinnointipalkkio 0,42 % vuodessa</li>
+                    <li>Merkintäpalkkio 0,05 %</li>
+                    <li>
+                      Lunastuspalkkio 0,1 %,<br />
+                      jos sijoitusaika &leq; 180 päivää
+                    </li>
+                    <li>
+                      Lunastuspalkkio 0,05 %,<br />
+                      jos sijoitusaika > 180 päivää
+                    </li>
+                    <li>Aloituspäivämäärä 1.6.2010</li>
+                    <li>Minimimerkintä 10 €</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <a
+              class="collapsed card-link"
+              data-toggle="collapse"
+              href="#collapseThree">
+              Indeksirahasto USA
+            </a>
+          </div>
+          <div id="collapseThree" class="collapse" data-parent="#accordion">
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <img
+                    class="card-img-top"
+                    src="./Images/usalippu.jpg"
+                    alt="USA lippu"/>
+                </div>
+                <div class="col">
+                  <h2>Indeksirahasto USA</h2>
+                  <p>
+                    Yhdysvaltojen osakemarkkinoiden osuus on yli puolet koko
+                    maailman osakemarkkinoiden arvosta ja muun muassa tämän
+                    takia sijoittajan olisikin järkevää olla mukana USA:n
+                    osakemarkkinoilla. Indeksirahasto USA pyrkii seuraamaan S&P
+                    500 -indeksin tuottoa, joka koostuu siis 500 suuresta
+                    yhdysvaltalaisyrityksestä.
+                  </p>
+                </div>
+                <div class="col">
+                  <ul>
+                    <li>Hallinnointipalkkio 0,42 % vuodessa</li>
+                    <li>Merkintäpalkkio 0,05 %</li>
+                    <li>
+                      Lunastuspalkkio 0,1 %,<br />
+                      jos sijoitusaika &leq; 180 päivää
+                    </li>
+                    <li>
+                      Lunastuspalkkio 0,05 %,<br />
+                      jos sijoitusaika > 180 päivää
+                    </li>
+                    <li>Aloituspäivämäärä 1.6.2010</li>
+                    <li>Minimimerkintä 10 €</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <a
+              class="collapsed card-link"
+              data-toggle="collapse"
+              href="#collapseFour">
+              Indeksirahasto Aasia
+            </a>
+          </div>
+          <div id="collapseFour" class="collapse" data-parent="#accordion">
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <img
+                    class="card-img-top"
+                    src="./Images/japanilippu.jpg"
+                    alt="kiina eteläkorea liput"/>
+                </div>
+                <div class="col" id="fund-asia">
+                  <h2>Indeksirahasto Aasia</h2>
+                  <p>
+                    Indeksirahasto Aasia on uusin rahastomme. Rahasto sijoittaa
+                    Aasian maiden sekä Australian yrityksiin. Rahasto pyrkii seuraamaan 
+                    Dow Jones Sustainability Asia Pacific -osakeindeksin tuottoa.
+                  </p>
+                </div>
+                <div class="col">
+                  <ul>
+                    <li>Hallinnointipalkkio 0,41 % vuodessa</li>
+                    <li>Merkintäpalkkio 0,05 %</li>
+                    <li>
+                      Lunastuspalkkio 0,1 %,<br />
+                      jos sijoitusaika &leq; 180 päivää
+                    </li>
+                    <li>
+                      Lunastuspalkkio 0,05 %,<br />
+                      jos sijoitusaika > 180 päivää
+                    </li>
+                    <li>Aloituspäivämäärä 1.12.2020</li>
+                    <li>Minimimerkintä 10 €</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <a
+              class="collapsed card-link"
+              data-toggle="collapse"
+              href="#collapseFive">
+              Dividend Europe
+            </a>
+          </div>
+          <div id="collapseFive" class="collapse" data-parent="#accordion">
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <img
+                    class="card-img-top"
+                    src="./Images/eurot.jpg"
+                    alt="euroja"/>
+                </div>
+                <div class="col">
+                  <h2>Dividend Europe</h2>
+                  <p>
+                    Dividend Europe on aktiivinen rahasto, joka sijoittaa
+                    Eurooppalaisiin yrityksiin, joilla on vahvaa historiallista
+                    näyttöä hyvinä osingon maksajina ja jotka voisivat myös
+                    tulevaisuudessa pystyä kasvattamaan osinkoa. Rahaston
+                    hallinnointipalkkio on melko maltillinen ja yritysten
+                    vaihtuvuus salkussa on vähäistä.
+                  </p>
+                </div>
+                <div class="col">
+                  <ul>
+                    <li>Hallinnointipalkkio 0,75 % vuodessa</li>
+                    <li>Merkintäpalkkio 0 %</li>
+                    <li>
+                      Lunastuspalkkio 0,5 %,<br />
+                      jos sijoitusaika &leq; 360 päivää
+                    </li>
+                    <li>
+                      Lunastuspalkkio 0 %,<br />
+                      jos sijoitusaika > 360 päivää
+                    </li>
+                    <li>Aloituspäivämäärä 1.4.2012</li>
+                    <li>Minimimerkintä 10 €</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <a
+              class="collapsed card-link"
+              data-toggle="collapse"
+              href="#collapseSix">
+              Dividend USA
+            </a>
+          </div>
+          <div id="collapseSix" class="collapse" data-parent="#accordion">
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <img
+                    class="card-img-top"
+                    src="./Images/dollarit.jpg"
+                    alt="dollareita"/>
+                </div>
+                <div class="col">
+                  <h2>Dividend USA</h2>
+                  <p>
+                    Dividend USA rahasto sijoittaa yhdysvaltalaisiin yrityksiin,
+                    joilla on vahvaa historiallista näyttöä osinkojen
+                    kasvattamisesta ja jotka voisivat myös tulevaisuudessa
+                    pystyä mahdollisimman hyviin osinkojen korotuksiin.
+                    Vähintään puolet rahaston yrityksistä on oltava niin
+                    sanottuja osinkoaristokraatteja, jotka ovat siis
+                    kasvattaneet osinkoa vähintään 25 vuotta yhtäjaksoisesti.
+                  </p>
+                </div>
+                <div class="col">
+                  <ul>
+                    <li>Hallinnointipalkkio 0,78 % vuodessa</li>
+                    <li>Merkintäpalkkio 0 %</li>
+                    <li>
+                      Lunastuspalkkio 0,5 %,<br />
+                      jos sijoitusaika &leq; 360 päivää
+                    </li>
+                    <li>
+                      Lunastuspalkkio 0 %,<br />
+                      jos sijoitusaika > 360 päivää
+                    </li>
+                    <li>Aloituspäivämäärä 1.4.2012</li>
+                    <li>Minimimerkintä 10 €</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header">
+            <a
+              class="collapsed card-link"
+              data-toggle="collapse"
+              href="#collapseSeven">
+              Megatrendit
+            </a>
+          </div>
+          <div id="collapseSeven" class="collapse" data-parent="#accordion">
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <img
+                    class="card-img-top"
+                    src="./Images/maapallo.jpg"
+                    alt="dollareita"/>
+                </div>
+                <div class="col">
+                  <h2>Megatrendit</h2>
+                  <p>
+                    Kaupungistuminen, väestön ikääntyminen länsimaissa,
+                    fossiilisten polttoaineiden korvaaminen... Megatrendit rahasto 
+                    pyrkii löytämään menestyviä yrityksiä joltakin lähitulevaisuuden 
+                    megatrendin alalta.
+                  </p>
+                </div>
+                <div class="col">
+                  <ul>
+                    <li>Hallinnointipalkkio 0,88 % vuodessa</li>
+                    <li>Merkintäpalkkio 0 %</li>
+                    <li>
+                      Lunastuspalkkio 0,5 %,<br />
+                      jos sijoitusaika &leq; 360 päivää
+                    </li>
+                    <li>
+                      Lunastuspalkkio 0 %,<br />
+                      jos sijoitusaika > 360 päivää
+                    </li>
+                    <li>Aloituspäivämäärä 1.7.2018</li>
+                    <li>Minimimerkintä 10 €</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--Compund interest sliders -->
+      <div class="slidecontainer">
+        <h4>
+          Katso tuottolaskurillamme, kuinka paljon säästösi voivat sijoittamalla
+          kasvaa. Osakkeiden vuosittainen keskimääräinen tuotto-odotus on
+          oletuksena 7 %. Korko lasketaan kuukausittain.
+        </h4>
+
+        <div class="row">
+          <div class="col" style="margin-top: 25px">
+            <p id="begin-investment-value">Kertasijoitus alussa: 1000 €</p>
+            <input
+              type="range"
+              min="0"
+              max="50000"
+              value="1000"
+              step="100"
+              class="slider"
+              id="begin-investment"
+              onchange="updateBeginInvestment(this.value);"/>
+          </div>
+          <div class="col" style="margin-top: 25px">
+            <p id="monthly-saving-value">Kuukausittainen säästö: 50 €</p>
+            <input
+              type="range"
+              min="10"
+              max="2000"
+              value="50"
+              step="10"
+              class="slider"
+              id="monthly-saving"
+              onchange="updateMonthlySaving(this.value);"/>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col" style="margin-top: 25px">
+            <p id="yield-value">Vuotuinen tuotto-odotus 7 %</p>
+            <input
+              type="range"
+              min="0"
+              max="20"
+              value="7"
+              step="0.5"
+              class="slider"
+              id="yield"
+              onchange="updateYield(this.value);"/>
+          </div>
+          <div class="col" style="margin-top: 25px; margin-bottom: 20px">
+            <p id="invest-time-value">Sijoitusaika 10 vuotta</p>
+            <input
+              type="range"
+              min="1"
+              max="50"
+              value="10"
+              class="slider"
+              id="invest-time"
+              onchange="updateInvestTime(this.value);"/>
+          </div>
+        </div>
+      </div>
+
+      <div id="investment-total-value">
+        <h5><strong>Sijoitusten arvo sijoitusajan lopussa: 10714</strong></h5>
+      </div>
+
+      <!-- Footer -->
+      <footer class="page-footer font-small blue" id="contact">
+        <div class="text-center row container">
+          <div class="col">
+            <p>
+              Botnia Investment Oy Alatori 1 (3. kerros) 65100 Vaasa
+              <a href="mailto:info@botniainvestment.fi"
+                >info@botniainvestment.fi</a>
+            </p>
+            <!-- Copyright -->
+            <div class="footer-copyright text-center">
+              © 2021 Copyright:
+              <a href="index.html"> Botnia Investment</a>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      var beginInvestment = parseInt(
+        document.getElementById("begin-investment").value
+      );
+      var monthlyInvestment = parseInt(
+        document.getElementById("monthly-saving").value
+      );
+      var yield = parseFloat(document.getElementById("yield").value);
+      var investTime = parseInt(document.getElementById("invest-time").value);
+      var totalCapital = 0;
+
+      function updateBeginInvestment(val) {
+        $("#begin-investment-value").html(
+          "<p>Kertasijoitus alussa " + val + " €</p>"
+        );
+        beginInvestment = parseInt(val);
+        countCapital();
+      }
+      function updateMonthlySaving(val) {
+        $("#monthly-saving-value").html(
+          "<p>Kuukausittainen säästö " + val + " €</p>"
+        );
+        monthlyInvestment = parseInt(val);
+        countCapital();
+      }
+      function updateYield(val) {
+        $("#yield-value").html("<p>Vuotuinen tuotto-odotus " + val + " %</p>");
+        yield = parseFloat(val);
+        countCapital();
+      }
+      function updateInvestTime(val) {
+        $("#invest-time-value").html("<p>Sijoitusaika " + val + " vuotta</p>");
+        investTime = parseInt(val);
+        countCapital();
+      }
+
+      function countCapital() {
+        totalCapital = beginInvestment;
+        
+        //monthly saving is added at the begin of month
+        for (let i = 0; i < investTime * 12; i++) {
+          totalCapital =
+            (1 + yield / 100 / 12) * (totalCapital + monthlyInvestment);
+        }
+        $("#investment-total-value").html(
+          "<h5><strong>Sijoitusten arvo sijoitusajan lopussa: " +
+            totalCapital.toFixed(0) +
+            "</strong></h5>"
+        );
+      }
+    </script>
+  </body>
+</html>

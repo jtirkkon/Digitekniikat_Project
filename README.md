@@ -1,2 +1,4 @@
 # Digitekniikat_Project
-Web page school project
+Website school project
+
+These websites are made for Botnia Investment company, which is fictional company offering stock funds.
